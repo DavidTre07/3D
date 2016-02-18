@@ -127,16 +127,19 @@ module Screw_hole(size=[1, 1, 1],diam_vis=1,haut_vis=1,bords=1,center=false)
     translate(center ? [0, 0, 0] : ([size[0]/2,size[1]/2,0])) //On se mets au centre de la boite
         for (x = [-size[0]/2+arrondi/2+epaisseur, size[0]/2-largeur-arrondi/2-epaisseur],
              y = [-size[1]/2+epaisseur, size[1]/2-2*epaisseur]) {
-            posy = y<0 ? epaisseur/2 : epaisseur*-1/2;
+            posy = y<0 ? -epaisseur : epaisseur;
+            rotation= y<0 ? -90/4 : 90/4;
             translate([x, y, epaisseur]) {
                 union(){
                     cube([largeur,epaisseur,hauteur],center=false);
-                    translate([0,-2*posy,hauteur-tete])
-                    polyhedron
-                        (points=[[0,0,0],[largeur,0,0],[0,epaisseur,0],[largeur,epaisseur,0],
-                                     [0,epaisseur/2+posy,tete],[largeur,epaisseur/2+posy,tete]],
-                         faces =[[0,1,2],[1,2,3],[0,1,4],[1,5,4],[2,3,4],[3,4,5],[0,2,4],[1,3,5]]
-                        );
+                    translate([0,posy,hauteur-tete]) {
+                        difference() {
+                            cube([largeur,epaisseur,tete]);
+                            translate([-artefact,posy,0])
+                                rotate([rotation,0,0])
+                                    cube([largeur+2*artefact,epaisseur,3*tete]);
+                        }
+                    }
                 }
             }
         }
@@ -169,8 +172,6 @@ module box()
         }
         if(Closing_Type=="Screw")
             support_vis(Interieur,Screw_width,Screw_Length,External_borders_width);
-        //translate([0,0,20]) //A supprimer
-         //   trou_fixation(Interieur+[2*External_borders_width,2*External_borders_width,External_borders_width],Fix_Width,Fix_Length,Fix_Head_Length,External_borders_width,Screw_width); //A supprimer
     }
 }
 
