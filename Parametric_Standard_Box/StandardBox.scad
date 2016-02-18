@@ -10,7 +10,7 @@ Internal_Height=60;
 // - Fermeture a vis ou mecanique - Screw closing or mecanical
 Closing_Type="Mecanical";// [Screw:Screw closing,Mecanical:Mecanical closing]
 // - Largeur de la fixation - Fixation width
-Fix_Width=10;//[3:0.1:10]
+Fix_Width=10;//[5:1:20]
 // - Longeur de la fixation - Fixation length
 Fix_Length=10;//[5:0.1:20]
 // - Longueur de tete de fixation - Head fixation length
