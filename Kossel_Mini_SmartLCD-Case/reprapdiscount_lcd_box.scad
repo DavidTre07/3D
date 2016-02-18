@@ -9,7 +9,7 @@
 ***************************************************************************/
 
 // - Taille des montants - Size of extrusion
-Extrusion_Size=25; //[15:1:25]
+Extrusion_Size=15; //[15:1:25]
 
 /* [Hidden] */
 // - Epaisseur de la fixation - Fixation thickness
