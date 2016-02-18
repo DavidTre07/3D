@@ -2,11 +2,11 @@
 // - Epaisseur bords extérieurs - External border width
 External_borders_width=1.3;//[0.4:0.1:5.0]
 // - Longeur interne - Internal lengh
-Length=50;
+Internal_Length=50;
 // - Largeur interne - Internal Width
-Width=35;
+Internal_Width=35;
 // - Hauteur interne - Internal Height
-Height=30;
+Internal_Height=30;
 // - Longueur de vis - Screw Length
 Screw_Length=15;
 // - Epaisseur de vis - Screw Width
@@ -17,10 +17,6 @@ Screw_head_hole=1;// [0:No, 1:Yes]
 Screw_head_height=1;
 // - Largeur de tete vis - Screw head width
 Screw_head_width=6;//[2:0.1:7]
-// - Epaisseur des bords internes - Internal borders width
-Internal_borders_width=1;//[1:0.1:5]
-// - Hauteur des cloisons - Internal borders Height
-Internal_borders_Height=15;
 // - Trous aération - Holes for air ventilation
 Holes=1;// [0:No, 1:Yes]
 // - Diametre des trous d'aération - Holes size
@@ -34,8 +30,12 @@ part = "both"; // [box:Box Only,cover:Cover Only,both:Box and Cover]
 /////////////// Paramètres FIN - Parameters END
 
 /* [Hidden] */
+// - Epaisseur des bords internes - Internal borders width
+Internal_borders_width=1;//[1:0.1:5]
+// - Hauteur des cloisons - Internal borders Height
+Internal_borders_Height=15;
 //Taille intérieure - Internal size
-Interieur = [Length,Width,Height];
+Interieur = [Internal_Length,Internal_Width,Internal_Height];
 //Valeur pour supprimer les artefacts - value for removing artefacts
 artefact=0.05;
 //Space between pieces
