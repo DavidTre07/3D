@@ -1,4 +1,7 @@
 /////////////// Paramètres - Parameters
+/* [Box] */
+// - Which part do you want to print
+part = "both";// [box:Box Only,cover:Cover Only,both:Box and Cover]
 // - Epaisseur bords extérieurs - External border width
 External_borders_width=1.3;//[0.4:0.1:5.0]
 // - Longeur interne - Internal lengh
@@ -7,6 +10,8 @@ Internal_Length=70;
 Internal_Width=55;
 // - Hauteur interne - Internal Height
 Internal_Height=60;
+
+/* [Closing] */
 // - Fermeture a vis ou mecanique - Screw closing or mecanical
 Closing_Type="Mecanical";// [Screw:Screw closing,Mecanical:Mecanical closing]
 // - Largeur de la fixation - Fixation width
@@ -26,6 +31,8 @@ Screw_head_height=1;
 // - Largeur de tete vis - Screw head width
 Screw_head_width=6;//[2:0.1:7]
 // - Trous aération - Holes for air ventilation
+
+/* [Airing] */
 Holes=1;// [0:No, 1:Yes]
 // - Diametre des trous d'aération - Holes size
 Holes_size=1;//[1:0.1:5]
@@ -33,8 +40,6 @@ Holes_size=1;//[1:0.1:5]
 Holes_number=25;//[4,9,16,25]
 // - Espace entre les trous - Space between holes
 Holes_space=2;//[1:0.1:5]
-// - Which part do you want to print
-part = "both";// [box:Box Only,cover:Cover Only,both:Box and Cover]
 /////////////// Paramètres FIN - Parameters END
 
 /* [Hidden] */
