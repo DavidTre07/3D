@@ -3,7 +3,7 @@ tete_diam_int=6;
 tete_hauteur=7;
 
 corps_diam_int=3.2;
-corps_hauteur=15;
+corps_hauteur=12;
 corps_epaisseur=3;
 
 encoche_hauteur=4.0;
