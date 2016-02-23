@@ -44,7 +44,11 @@ module glass() {
 
 %translate([0,0,10]) rotate([90,0,0]) text("Down view");
 %color("LightCyan") translate([0,0,epaisseur_sur_vitre-artefact]) glass();
-rotate([0,0,0]) translate([-vitre_diam/2-diam_ext_support/6,0,0]) support_vitre();
-%color("gold") rotate([0,0,120]) translate([-vitre_diam/2-diam_ext_support/6,0,0]) support_vitre();
-%color("gold") rotate([0,0,240]) translate([-vitre_diam/2-diam_ext_support/6,0,0]) support_vitre();
+
+color("gold") rotate([0,0,0  ]) translate([-vitre_diam/2-diam_ext_support/6,0,0]) support_vitre();
+
+for(angle=[60:60:300])
+    %color("gold") rotate([0,0,angle]) translate([-vitre_diam/2-diam_ext_support/6,0,0]) support_vitre();
+
+
 %translate([0,0,-10]) rotate([-90,0,0]) text("Top view");
