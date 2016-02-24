@@ -14,6 +14,7 @@ vitre_haut=3; // [2:0.1:5]
 
 /* [Hidden] */
 artefact=0.05;
+globalView=0; //[0,1] Put 1 if you want to see a global view
 
 module support_vitre() {
     position_encoche=diam_ext_support/6;
@@ -42,13 +43,14 @@ module glass() {
         cylinder(h=vitre_haut+artefact,d=vitre_diam,$fn=100); //Vitre
 }
 
-%translate([0,0,10]) rotate([90,0,0]) text("Down view");
-%color("LightCyan") translate([0,0,epaisseur_sur_vitre-artefact]) glass();
+if (globalView) %translate([0,0,10]) rotate([90,0,0]) text("Down view");
+if (globalView) %color("LightCyan") translate([0,0,epaisseur_sur_vitre-artefact]) glass();
 
-color("gold") rotate([0,0,0  ]) translate([-vitre_diam/2-diam_ext_support/6,0,0]) support_vitre();
+if (globalView) color("gold") translate([-vitre_diam/2-diam_ext_support/6,0,0]) support_vitre();
+else support_vitre();
 
-for(angle=[60:60:300])
-    %color("gold") rotate([0,0,angle]) translate([-vitre_diam/2-diam_ext_support/6,0,0]) support_vitre();
+if (globalView)
+    for(angle=[60:60:300])
+        %color("gold") rotate([0,0,angle]) translate([-vitre_diam/2-diam_ext_support/6,0,0]) support_vitre();
 
-
-%translate([0,0,-10]) rotate([-90,0,0]) text("Top view");
+if (globalView) %translate([0,0,-10]) rotate([-90,0,0]) text("Top view");
