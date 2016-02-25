@@ -129,22 +129,18 @@ module Screw_hole(size=[1, 1, 1],diam_vis=1,haut_vis=1,bords=1,center=false)
  //Pates de fixation
  module fixation(size=[1, 1, 1],largeur=1,hauteur=1,tete=1,epaisseur=1,arrondi=2,center=false)
  {
+    diam2=2*sqrt((epaisseur*epaisseur)/2);
+    diam1=2*sqrt((largeur*largeur)/2);
     translate(center ? [0, 0, 0] : ([size[0]/2,size[1]/2,0])) //On se mets au centre de la boite
         for (x = [-size[0]/2+arrondi/2+epaisseur, size[0]/2-largeur-arrondi/2-epaisseur],
              y = [-size[1]/2+epaisseur, size[1]/2-2*epaisseur]) {
-            posy = y<0 ? -epaisseur : epaisseur;
+            posy = y<0 ? 0 : epaisseur;
             rotation= y<0 ? -90/4 : 90/4;
             translate([x, y, epaisseur]) {
                 union(){
                     cube([largeur,epaisseur,hauteur],center=false);
-                    translate([0,posy,hauteur-tete]) {
-                        difference() {
-                            cube([largeur,epaisseur,tete]);
-                            translate([-artefact,posy,0])
-                                rotate([rotation,0,0])
-                                    cube([largeur+2*artefact,epaisseur,3*tete]);
-                        }
-                    }
+                    translate([0,posy,hauteur])
+                        rotate([0,90,0]) cylinder(h=largeur,r=epaisseur,$fn=100);
                 }
             }
         }
