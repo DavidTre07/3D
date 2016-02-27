@@ -18,8 +18,6 @@ Closing_Type="Mecanical";// [Screw:Screw closing,Mecanical:Mecanical closing]
 Fix_Width=10;//[5:1:20]
 // - Longeur de la fixation - Fixation length
 Fix_Length=10;//[5:0.1:20]
-// - Longueur de tete de fixation - Head fixation length
-Fix_Head_Length=3;//[2:0.1:5]
 // - Longueur de vis - Screw Length
 Screw_Length=15;
 // - Epaisseur de vis (change aussi les angles de la boite) - Screw Width (this will also change the corners of the box)
@@ -127,10 +125,12 @@ module Screw_hole(size=[1, 1, 1],diam_vis=1,haut_vis=1,bords=1,center=false)
  }
  
  //Pates de fixation
- module fixation(size=[1, 1, 1],largeur=1,hauteur=1,tete=1,epaisseur=1,arrondi=2,center=false)
+ module fixation(size=[1, 1, 1],largeur=1,hauteur=1,epaisseur=1,arrondi=2,center=false)
  {
     diam2=2*sqrt((epaisseur*epaisseur)/2);
     diam1=2*sqrt((largeur*largeur)/2);
+    Head_Width=largeur*0.8; //80% pour être sûr que tout rentre bien
+    Head_Gap=(largeur-Head_Width)/2;
     translate(center ? [0, 0, 0] : ([size[0]/2,size[1]/2,0])) //On se mets au centre de la boite
         for (x = [-size[0]/2+arrondi/2+epaisseur, size[0]/2-largeur-arrondi/2-epaisseur],
              y = [-size[1]/2+epaisseur, size[1]/2-2*epaisseur]) {
@@ -139,22 +139,22 @@ module Screw_hole(size=[1, 1, 1],diam_vis=1,haut_vis=1,bords=1,center=false)
             translate([x, y, epaisseur]) {
                 union(){
                     cube([largeur,epaisseur,hauteur],center=false);
-                    translate([0,posy,hauteur])
-                        rotate([0,90,0]) cylinder(h=largeur,r=epaisseur,$fn=100);
+                    translate([Head_Gap,posy,hauteur])
+                        rotate([0,90,0]) cylinder(h=Head_Width,r=epaisseur,$fn=100);
                 }
             }
         }
  }
  
  //Trous pour les pates de fixation
- module trou_fixation(size=[1, 1, 1],largeur=1,hauteur=1,tete=1,epaisseur=1,arrondi=2,center=false)
+ module trou_fixation(size=[1, 1, 1],largeur=1,hauteur=1,epaisseur=1,arrondi=2,center=false)
  {
      translate(center ? [0, 0, 0] : ([size[0]/2,size[1]/2,0])) //On se mets au centre de la boite
         for (x = [-size[0]/2+arrondi/2+epaisseur, size[0]/2-largeur-arrondi/2-epaisseur],
              y = [-size[1]/2+epaisseur, size[1]/2-2*epaisseur]) {
              posy = y<0 ? epaisseur : epaisseur*-1+2*artefact;
              translate([x, y-posy, size[2]-hauteur])
-                 cube([largeur,epaisseur+2*artefact,tete],center=false);
+                 cube([largeur,epaisseur+2*artefact,epaisseur],center=false);
         }
  }
  
@@ -169,7 +169,7 @@ module box()
             if(Holes)
                 trous_aeration([Interieur[0]+2*External_borders_width,Interieur[1]+2*External_borders_width,External_borders_width],Holes_size,Holes_number,Holes_space,External_borders_width+2*artefact);
             if(Closing_Type!="Screw")
-                trou_fixation(Interieur+[2*External_borders_width,2*External_borders_width,External_borders_width],Fix_Width,Fix_Length,Fix_Head_Length,External_borders_width,Screw_width);
+                trou_fixation(Interieur+[2*External_borders_width,2*External_borders_width,External_borders_width],Fix_Width,Fix_Length,External_borders_width,Screw_width);
         }
         if(Closing_Type=="Screw")
             support_vis(Interieur,Screw_width,Screw_Length,External_borders_width);
@@ -195,7 +195,7 @@ module couvercle()
             if(Holes)
                 trous_aeration([Interieur[0]+2*External_borders_width,Interieur[1]+2*External_borders_width,External_borders_width],Holes_size,Holes_number,Holes_space,External_borders_width+2*artefact);
             }
-            fixation([Interieur[0]+2*External_borders_width,Interieur[1]+2*External_borders_width,External_borders_width],Fix_Width,Fix_Length,Fix_Head_Length,External_borders_width,Screw_width);
+            fixation([Interieur[0]+2*External_borders_width,Interieur[1]+2*External_borders_width,External_borders_width],Fix_Width,Fix_Length,External_borders_width,Screw_width);
         }
     }
 }
