@@ -37,49 +37,42 @@ module hole(hsize=1) { //weight calculation with hole_width and hole_height and 
 
 difference() {
     dice_empty();
-    rotate ([0, 0, 0]) {   //Z axis
-        //1
+    rotate ([180, 0, 0]) //1
+        translate([size/2,-size/2,-size-artefact])
+            translate([0,0,0]) hole(1);
+    rotate ([0, 0, 0]) //6
         translate([size/3,size/4,-artefact]) {
-            translate ([0,0,0]) hole(6);
-            translate([0,size/4,0]) hole(6);
-            translate([0,size/2,0]) hole(6);
-            translate([size/3,0,0]) hole(6);
+            translate ([0,0,0])          hole(6);
+            translate([0,size/4,0])      hole(6);
+            translate([0,size/2,0])      hole(6);
+            translate([size/3,0,0])      hole(6);
             translate([size/3,size/4,0]) hole(6);
             translate([size/3,size/2,0]) hole(6);
         }
-        //6
-        translate([size/4,size/4,size-1+artefact]) {
-            translate([size/4,size/4,0]) hole(1);
+    rotate ([90, 0, 180]) //2
+        translate([-size/3,size/3,-artefact]) {
+            translate([0,size/3,0])  hole(2);
+            translate([-size/3,0,0]) hole(2);
         }
-    }
-    rotate ([90, 0, 0]) {   //Y Axis
-        //2
-        translate([size/3,size/3,-1+artefact]) {
-            translate([0,size/3,0]) hole(2);
-            translate([size/3,0,0]) hole(2);
-        }
-        //5
+    rotate ([90, 0, 0]) //5
         translate([size/3,size/3,-size-artefact]) {
-            translate([0,0,0]) hole(5);
-            translate([0,size/3,0]) hole(5);
-            translate([size/3,0,0]) hole(5);
+            translate([0,0,0])           hole(5);
+            translate([0,size/3,0])      hole(5);
+            translate([size/3,0,0])      hole(5);
             translate([size/3,size/3,0]) hole(5);
             translate([size/6,size/6,0]) hole(5);
         }
-    }
-    rotate ([0, 90, 0]) {   //X Axis
-        //3
-        translate([-size/3,size/3,size-1+artefact]) {
-            translate([0,0,0]) hole(3);
-            translate([-size/3,size/3,0]) hole(3);
-            translate([-size/6,size/6,0]) hole(3);
+    rotate ([0, 90, 180]) //3
+        translate([-size/3,-size/3,-size-artefact]) {
+            translate([0,0,0])             hole(3);
+            translate([-size/3,-size/3,0]) hole(3);
+            translate([-size/6,-size/6,0]) hole(3);
         }
-        //4
+    rotate ([0, 90, 0]) //4
         translate([-size/3,size/3,-artefact]) {
-            translate([0,0,0]) hole(4);
+            translate([0,0,0])            hole(4);
             translate([-size/3,size/3,0]) hole(4);
-            translate([-size/3,0,0]) hole(4);
-            translate([0,size/3,0]) hole(4);
+            translate([-size/3,0,0])      hole(4);
+            translate([0,size/3,0])       hole(4);
         }
-    }
 }
